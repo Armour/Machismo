@@ -9,13 +9,20 @@
 #import "CardMatchingGame.h"
 
 @interface CardMatchingGame()
+
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *cards; //of Card
+
 @end
 
+
 @implementation CardMatchingGame
-    
-- (NSMutableArray *)card {
+
+static const int MISMATCH_PANNALTY = 2;
+static const int MATCH_BONUS = 4;
+static const int FLIP_COST = 1;
+
+- (NSMutableArray *)cards {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
 }
@@ -37,10 +44,6 @@
     return self;
 }
 
-static const int MISMATCH_PANNALTY = 2;
-static const int MATCH_BONUS = 4;
-static const int FLIP_COST = 1;
-
 - (void)chooseCardAtIndex:(NSUInteger)index {
     Card *card = [self cardAtIndex:index];
     if (!card.isMatched) {
@@ -59,8 +62,8 @@ static const int FLIP_COST = 1;
                         self.score -= MISMATCH_PANNALTY;
                         othercard.chosen = NO;
                     }
+                    break;
                 }
-                break;
             }
             self.score -= FLIP_COST;
             card.chosen = YES;

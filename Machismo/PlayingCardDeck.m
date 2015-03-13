@@ -10,6 +10,11 @@
 #import "PlayingCardDeck.h"
 #import "PlayingCard.h"
 
+@interface PlayingCardDeck()
+
+@end
+
+
 @implementation PlayingCardDeck
 
 -(instancetype) init {
