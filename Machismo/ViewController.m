@@ -88,4 +88,11 @@
     return [UIImage imageNamed:card.isChosen? @"card_front": @"card_back"];
 }
 
+- (IBAction)RestartButtonOnClicked:(UIButton *)sender {
+    self.game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                       usingDeck:[self createDeck]];
+    self.flipCount = -1;
+    [self updateUI];
+}
+
 @end

@@ -204,6 +204,15 @@
                                     <action selector="touchCardButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tKe-Pr-cx6"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fps-B2-Hkl">
+                                <rect key="frame" x="290" y="603" width="64" height="50"/>
+                                <state key="normal" backgroundImage="restart">
+                                    <color key="titleShadowColor" red="0.50196081399917603" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="RestartButtonOnClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fZZ-HC-VdS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -236,5 +245,6 @@
     </scenes>
     <resources>
         <image name="card_back" width="692" height="996"/>
+        <image name="restart" width="128" height="128"/>
     </resources>
 </document>
