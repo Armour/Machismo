@@ -17,6 +17,16 @@
 
 @synthesize suit = _suit;
 
+- (int)togetherA:(NSUInteger)a withB:(NSUInteger)b andC:(NSUInteger)c {
+    if ((a - b == 1) && (b - c == 1)) return 1;
+    if ((a - c == 1) && (c - b == 1)) return 1;
+    if ((b - a == 1) && (a - c == 1)) return 1;
+    if ((b - c == 1) && (c - a == 1)) return 1;
+    if ((c - a == 1) && (a - b == 1)) return 1;
+    if ((c - b == 1) && (b - a == 1)) return 1;
+    return 0;
+}
+
 - (int)match:(NSArray *)otherCards {
     int score = 0;
 
@@ -25,6 +35,17 @@
         if ([self.suit isEqualToString:otherCard.suit])
             score = 1;
         else if (self.rank == otherCard.rank)
+            score = 4;
+    } else {
+        PlayingCard *otherCard1 = [otherCards firstObject];
+        PlayingCard *otherCard2 = [otherCards lastObject];
+        if ([self.suit isEqualToString:otherCard1.suit] && [self.suit isEqualToString:otherCard2.suit])
+            score = 3;
+        else if (self.rank == otherCard1.rank && self.rank == otherCard2.rank)
+            score = 12;
+        else if ([self togetherA:self.rank withB:otherCard1.rank andC:otherCard2.rank])
+            score = 8;
+        else if (self.rank == otherCard1.rank || self.rank == otherCard2.rank || otherCard1.rank == otherCard2.rank)
             score = 4;
     }
 

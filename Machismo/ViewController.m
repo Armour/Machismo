@@ -18,11 +18,17 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
 
 @end
 
 
 @implementation ViewController
+
+- (void)viewDidLoad {
+    self.game.mode = 2;
+    self.game.openedNumber = 0;
+}
 
 - (CardMatchingGame *) game {
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
@@ -62,8 +68,18 @@
 
 - (IBAction)touchCardButton:(UIButton *)sender {
     NSUInteger cardIndex = [self.cardButtons indexOfObject:sender];
+    [self preview:cardIndex];
     [self.game chooseCardAtIndex:cardIndex];
     [self updateUI];
+}
+
+- (void)preview:(NSUInteger)cardIndex {
+    if (![self.game alreadyChosen:cardIndex]) {
+        [self.game letMeSee:cardIndex];
+        [NSThread sleepForTimeInterval:0.3];
+        [self updateUI];
+        [self.game afterSeeIt:cardIndex];
+    }
 }
 
 - (void)updateUI {
@@ -92,7 +108,22 @@
     self.game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                        usingDeck:[self createDeck]];
     self.flipCount = -1;
+    self.game.mode = self.segmentControl.selectedSegmentIndex;
+    self.game.openedNumber = 0;
     [self updateUI];
+}
+
+- (IBAction)changeGameMode:(UISegmentedControl *)sender {
+    switch (self.segmentControl.selectedSegmentIndex) {
+        case 0:
+            self.game.mode = 2;
+            break;
+        case 1:
+            self.game.mode = 3;
+            break;
+        default:
+            break;
+    }
 }
 
 @end

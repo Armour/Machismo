@@ -14,11 +14,17 @@
 
 @interface CardMatchingGame : NSObject
 
-@property (nonatomic, readonly) NSInteger score;
+@property  (nonatomic, readonly) NSInteger score;
+@property (nonatomic, assign) NSInteger mode;
+@property (nonatomic, assign) NSInteger openedNumber;
+
 - (instancetype)initWithCardCount:(NSUInteger)count
                         usingDeck: (Deck *)deck;
 - (void)chooseCardAtIndex:(NSUInteger) index;
 - (Card *)cardAtIndex:(NSUInteger) index;
+- (void)letMeSee:(NSUInteger) index ;
+- (void)afterSeeIt:(NSUInteger) index ;
+- (BOOL)alreadyChosen:(NSUInteger) index ;
 
 @end
 

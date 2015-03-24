@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "760604A71A8CF94300A7808E"
-               BuildableName = "Machismo.app"
+               BuildableName = "Matchismo.app"
                BlueprintName = "Machismo"
                ReferencedContainer = "container:Machismo.xcodeproj">
             </BuildableReference>
@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "760604C01A8CF94300A7808E"
-               BuildableName = "MachismoTests.xctest"
+               BuildableName = "MatchismoTests.xctest"
                BlueprintName = "MachismoTests"
                ReferencedContainer = "container:Machismo.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "760604C01A8CF94300A7808E"
-               BuildableName = "MachismoTests.xctest"
+               BuildableName = "MatchismoTests.xctest"
                BlueprintName = "MachismoTests"
                ReferencedContainer = "container:Machismo.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "760604A71A8CF94300A7808E"
-            BuildableName = "Machismo.app"
+            BuildableName = "Matchismo.app"
             BlueprintName = "Machismo"
             ReferencedContainer = "container:Machismo.xcodeproj">
          </BuildableReference>
@@ -72,11 +72,12 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "760604A71A8CF94300A7808E"
-            BuildableName = "Machismo.app"
+            BuildableName = "Matchismo.app"
             BlueprintName = "Machismo"
             ReferencedContainer = "container:Machismo.xcodeproj">
          </BuildableReference>
@@ -90,11 +91,12 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "760604A71A8CF94300A7808E"
-            BuildableName = "Machismo.app"
+            BuildableName = "Matchismo.app"
             BlueprintName = "Machismo"
             ReferencedContainer = "container:Machismo.xcodeproj">
          </BuildableReference>

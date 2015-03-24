@@ -12,6 +12,7 @@
 
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *cards; //of Card
+@property (nonatomic, strong) NSMutableArray *choosedCard;
 
 @end
 
@@ -25,6 +26,11 @@ static const int FLIP_COST = 1;
 - (NSMutableArray *)cards {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
+}
+
+- (NSMutableArray *)choosedCard {
+    if (!_choosedCard) _choosedCard = [[NSMutableArray alloc] init];
+    return _choosedCard;
 }
 
 - (instancetype)initWithCardCount:(NSUInteger)count
@@ -44,29 +50,81 @@ static const int FLIP_COST = 1;
     return self;
 }
 
+- (BOOL) alreadyChosen:(NSUInteger)index {
+    Card *card = [self cardAtIndex:index];
+    return card.chosen;
+}
+
+- (void) letMeSee:(NSUInteger)index {
+    Card *card = [self cardAtIndex:index];
+    card.chosen = YES;
+}
+
+- (void) afterSeeIt:(NSUInteger)index {
+    Card *card = [self cardAtIndex:index];
+    card.chosen = NO;
+}
+
 - (void)chooseCardAtIndex:(NSUInteger)index {
     Card *card = [self cardAtIndex:index];
+    NSArray *othercard;
     if (!card.isMatched) {
         if (card.isChosen) {
             card.chosen = NO;
         } else {
-            //match against another card
-            for (Card *othercard in self.cards) {
-                if (othercard.isChosen && !othercard.isMatched) {
-                    int matchScore = [card match:@[othercard]];
-                    if (matchScore) {
-                        self.score += matchScore * MATCH_BONUS;
-                        card.matched = YES;
-                        othercard.matched = YES;
+            switch ([self.choosedCard count]) {
+                case 0:
+                    self.score -= FLIP_COST;
+                    self.openedNumber++;
+                    [self.choosedCard addObject:card];
+                    card.chosen = YES;
+                    break;
+                case 1:
+                    if (self.mode == 2) {
+                        othercard = self.choosedCard;
+                        int matchScore = [card match:othercard];
+                        if (matchScore) {
+                            self.score += matchScore * MATCH_BONUS;
+                            for (Card *eachcard in self.choosedCard)
+                                eachcard.matched = YES;
+                            card.matched = YES;
+                            card.chosen = YES;
+                        } else {
+                            self.score -= MISMATCH_PANNALTY;
+                            for (Card *eachcard in self.choosedCard)
+                                eachcard.chosen = NO;
+                            card.chosen = NO;
+                        }
+                        self.openedNumber = 0;
+                        [self.choosedCard removeAllObjects];
                     } else {
-                        self.score -= MISMATCH_PANNALTY;
-                        othercard.chosen = NO;
+                        self.score -= FLIP_COST;
+                        self.openedNumber++;
+                        [self.choosedCard addObject:card];
+                        card.chosen = YES;
                     }
                     break;
-                }
+                case 2:
+                    othercard = self.choosedCard;
+                    int matchScore = [card match:othercard];
+                    if (matchScore) {
+                        self.score += matchScore * MATCH_BONUS;
+                        for (Card *eachcard in self.choosedCard)
+                            eachcard.matched = YES;
+                        card.matched = YES;
+                        card.chosen = YES;
+                    } else {
+                        self.score -= MISMATCH_PANNALTY;
+                        for (Card *eachcard in self.choosedCard)
+                            eachcard.chosen = NO;
+                        card.chosen = NO;
+                    }
+                    self.openedNumber = 0;
+                    [self.choosedCard removeAllObjects];
+                    break;
+                default:
+                    break;
             }
-            self.score -= FLIP_COST;
-            card.chosen = YES;
         }
     }
 }
