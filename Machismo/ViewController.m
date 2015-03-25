@@ -76,7 +76,7 @@
 - (void)preview:(NSUInteger)cardIndex {
     if (![self.game alreadyChosen:cardIndex]) {
         [self.game letMeSee:cardIndex];
-        [NSThread sleepForTimeInterval:0.3];
+        //[NSThread sleepForTimeInterval:0.3];
         [self updateUI];
         [self.game afterSeeIt:cardIndex];
     }
@@ -108,7 +108,8 @@
     self.game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                        usingDeck:[self createDeck]];
     self.flipCount = -1;
-    self.game.mode = self.segmentControl.selectedSegmentIndex;
+    self.game.mode = 2;
+    self.segmentControl.selectedSegmentIndex = 0;
     self.game.openedNumber = 0;
     [self updateUI];
 }

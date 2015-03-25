@@ -71,6 +71,11 @@ static const int FLIP_COST = 1;
     if (!card.isMatched) {
         if (card.isChosen) {
             card.chosen = NO;
+            for (Card *othercard in self.choosedCard) {
+                if ([othercard.contents isEqual:card.contents]) {
+                    [self.choosedCard removeObjectAtIndex:[self.choosedCard indexOfObject:othercard]];
+                }
+            }
         } else {
             switch ([self.choosedCard count]) {
                 case 0:
@@ -89,14 +94,17 @@ static const int FLIP_COST = 1;
                                 eachcard.matched = YES;
                             card.matched = YES;
                             card.chosen = YES;
+                            self.openedNumber = 0;
+                            [self.choosedCard removeAllObjects];
                         } else {
                             self.score -= MISMATCH_PANNALTY;
                             for (Card *eachcard in self.choosedCard)
                                 eachcard.chosen = NO;
-                            card.chosen = NO;
+                            self.openedNumber = 1;
+                            [self.choosedCard removeAllObjects];
+                            [self.choosedCard addObject:card];
+                            card.chosen = YES;
                         }
-                        self.openedNumber = 0;
-                        [self.choosedCard removeAllObjects];
                     } else {
                         self.score -= FLIP_COST;
                         self.openedNumber++;
@@ -113,14 +121,17 @@ static const int FLIP_COST = 1;
                             eachcard.matched = YES;
                         card.matched = YES;
                         card.chosen = YES;
+                        self.openedNumber = 0;
+                        [self.choosedCard removeAllObjects];
                     } else {
                         self.score -= MISMATCH_PANNALTY;
                         for (Card *eachcard in self.choosedCard)
                             eachcard.chosen = NO;
-                        card.chosen = NO;
+                        self.openedNumber = 1;
+                        [self.choosedCard removeAllObjects];
+                        [self.choosedCard addObject:card];
+                        card.chosen = YES;
                     }
-                    self.openedNumber = 0;
-                    [self.choosedCard removeAllObjects];
                     break;
                 default:
                     break;
