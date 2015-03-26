@@ -68,7 +68,8 @@
 
 - (IBAction)touchCardButton:(UIButton *)sender {
     NSUInteger cardIndex = [self.cardButtons indexOfObject:sender];
-    [self preview:cardIndex];
+    //[self preview:cardIndex];
+    [self.segmentControl setEnabled:false];
     [self.game chooseCardAtIndex:cardIndex];
     [self updateUI];
 }
@@ -111,6 +112,7 @@
     self.game.mode = 2;
     self.segmentControl.selectedSegmentIndex = 0;
     self.game.openedNumber = 0;
+    [self.segmentControl setEnabled:true];
     [self updateUI];
 }
 
