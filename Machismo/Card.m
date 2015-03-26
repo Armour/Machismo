@@ -15,8 +15,6 @@
 
 @implementation Card
 
-//@synthesize contents = _contents;
-
 -(int) match:(NSArray *)otherCards {
     int score = 0;
     
