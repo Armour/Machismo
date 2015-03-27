@@ -50,21 +50,6 @@ static const int FLIP_COST = 1;
     return self;
 }
 
-- (BOOL) alreadyChosen:(NSUInteger)index {
-    Card *card = [self cardAtIndex:index];
-    return card.chosen;
-}
-
-- (void) letMeSee:(NSUInteger)index {
-    Card *card = [self cardAtIndex:index];
-    card.chosen = YES;
-}
-
-- (void) afterSeeIt:(NSUInteger)index {
-    Card *card = [self cardAtIndex:index];
-    card.chosen = NO;
-}
-
 - (void)chooseCardAtIndex:(NSUInteger)index {
     Card *card = [self cardAtIndex:index];
     NSArray *othercard;
@@ -76,6 +61,7 @@ static const int FLIP_COST = 1;
                     [self.choosedCard removeObjectAtIndex:[self.choosedCard indexOfObject:othercard]];
                 }
             }
+            self.information = [[NSString alloc] initWithFormat:@"flip back~"];
         } else {
             switch ([self.choosedCard count]) {
                 case 0:
@@ -83,6 +69,7 @@ static const int FLIP_COST = 1;
                     self.openedNumber++;
                     [self.choosedCard addObject:card];
                     card.chosen = YES;
+                    self.information = [[NSString alloc] initWithFormat:@""];
                     break;
                 case 1:
                     if (self.mode == 2) {

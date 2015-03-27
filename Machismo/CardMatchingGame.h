@@ -17,6 +17,7 @@
 @property  (nonatomic, readonly) NSInteger score;
 @property (nonatomic, assign) NSInteger mode;
 @property (nonatomic, assign) NSInteger openedNumber;
+@property (nonatomic, strong) NSString *information;
 
 - (instancetype)initWithCardCount:(NSUInteger)count
                         usingDeck: (Deck *)deck;

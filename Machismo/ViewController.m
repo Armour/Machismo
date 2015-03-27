@@ -55,6 +55,7 @@
     NSUInteger cardIndex = [self.cardButtons indexOfObject:sender];
     [self.segmentControl setEnabled:false];
     [self.game chooseCardAtIndex:cardIndex];
+    self.informationLabel.text = self.game.information;
     [self updateUI];
 }
 
