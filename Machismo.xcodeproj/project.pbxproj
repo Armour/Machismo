@@ -97,14 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				76CB9A031AA1BEE500004D57 /* Model */,
-				76FA04111A8F8BF900C2E6C3 /* Card.h */,
-				76FA040F1A8F8BEC00C2E6C3 /* Card.m */,
-				76FA040C1A8F8BB200C2E6C3 /* Deck.h */,
-				76FA040D1A8F8BDA00C2E6C3 /* Deck.m */,
-				76FA04121A8F928C00C2E6C3 /* PlayingCard.h */,
-				76FA04131A8F929500C2E6C3 /* PlayingCard.m */,
-				76FA04171A8F966100C2E6C3 /* PlayingCardDeck.h */,
-				76FA04151A8F965500C2E6C3 /* PlayingCardDeck.m */,
 				760604B21A8CF94300A7808E /* ViewController.h */,
 				760604B31A8CF94300A7808E /* ViewController.m */,
 				760604B51A8CF94300A7808E /* Main.storyboard */,
@@ -146,6 +138,14 @@
 		76CB9A031AA1BEE500004D57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				76FA04111A8F8BF900C2E6C3 /* Card.h */,
+				76FA040F1A8F8BEC00C2E6C3 /* Card.m */,
+				76FA040C1A8F8BB200C2E6C3 /* Deck.h */,
+				76FA040D1A8F8BDA00C2E6C3 /* Deck.m */,
+				76FA04121A8F928C00C2E6C3 /* PlayingCard.h */,
+				76FA04131A8F929500C2E6C3 /* PlayingCard.m */,
+				76FA04171A8F966100C2E6C3 /* PlayingCardDeck.h */,
+				76FA04151A8F965500C2E6C3 /* PlayingCardDeck.m */,
 				76CB9A021AA1BED100004D57 /* CardMatchingGame.h */,
 				76CB9A001AA1BEB000004D57 /* CardMatchingGame.m */,
 			);

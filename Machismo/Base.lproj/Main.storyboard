@@ -378,12 +378,22 @@
                                     <action selector="changeGameMode:" destination="vXZ-lx-hvc" eventType="valueChanged" id="6XS-OX-Ii6"/>
                                 </connections>
                             </segmentedControl>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="ydh-b9-KSO">
+                                <rect key="frame" x="21" y="485" width="333" height="95"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Start!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71A-0f-htT">
+                                <rect key="frame" x="40" y="513" width="295" height="40"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="flipLabel" destination="w9x-QF-mkn" id="LIE-DD-6b6"/>
+                        <outlet property="informationLabel" destination="71A-0f-htT" id="sY2-Pe-ifH"/>
                         <outlet property="scoreLabel" destination="WQw-Ki-TJS" id="4vR-3h-A3X"/>
                         <outlet property="segmentControl" destination="syn-uX-C5t" id="mZ9-UQ-X8b"/>
                         <outletCollection property="cardButtons" destination="utb-iF-g7h" id="lc3-gk-hpD"/>
@@ -425,6 +435,7 @@
     </scenes>
     <resources>
         <image name="card_back" width="692" height="996"/>
+        <image name="frame" width="852" height="156"/>
         <image name="restart" width="128" height="128"/>
     </resources>
 </document>

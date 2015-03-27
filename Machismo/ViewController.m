@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
+@property (weak, nonatomic) IBOutlet UILabel *informationLabel;
 
 @end
 
@@ -50,37 +51,11 @@
     self.flipLabel.text = [NSString stringWithFormat:@"Flip: %d", self.flipCount];
 }
 
-/*- (IBAction)touchCardButton:(UIButton *)sender {
-    if ([sender.currentTitle length]) {
-        [sender setBackgroundImage:[UIImage imageNamed:@"card_back"] forState:UIControlStateNormal];
-        [sender setTitle:@"" forState:UIControlStateNormal];
-        self.flipCount++;
-    } else {
-        Card *card = [self.deck drawRandomCard];
-        if (card) {
-            [sender setBackgroundImage:[UIImage imageNamed:@"card_front"] forState:UIControlStateNormal];
-            [sender setTitle:card.contents forState:UIControlStateNormal];
-            self.flipCount++;
-        }
-    }
-    self.flipLabel.text = [NSString stringWithFormat:@"Flip: %d", self.flipCount];
-}*/
-
 - (IBAction)touchCardButton:(UIButton *)sender {
     NSUInteger cardIndex = [self.cardButtons indexOfObject:sender];
-    //[self preview:cardIndex];
     [self.segmentControl setEnabled:false];
     [self.game chooseCardAtIndex:cardIndex];
     [self updateUI];
-}
-
-- (void)preview:(NSUInteger)cardIndex {
-    if (![self.game alreadyChosen:cardIndex]) {
-        [self.game letMeSee:cardIndex];
-        //[NSThread sleepForTimeInterval:0.3];
-        [self updateUI];
-        [self.game afterSeeIt:cardIndex];
-    }
 }
 
 - (void)updateUI {
@@ -106,14 +81,21 @@
 }
 
 - (IBAction)RestartButtonOnClicked:(UIButton *)sender {
-    self.game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                       usingDeck:[self createDeck]];
-    self.flipCount = -1;
-    self.game.mode = 2;
-    self.segmentControl.selectedSegmentIndex = 0;
-    self.game.openedNumber = 0;
-    [self.segmentControl setEnabled:true];
-    [self updateUI];
+    UIAlertView *warning = [[UIAlertView alloc] initWithTitle:@"Restart!?" message:@"Are you sure you want to restart?" delegate:self cancelButtonTitle:@"No.." otherButtonTitles:@"Yes!", nil];
+    [warning show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Yes!"]) {
+        self.game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                      usingDeck:[self createDeck]];
+        self.flipCount = -1;
+        self.game.mode = 2;
+        self.segmentControl.selectedSegmentIndex = 0;
+        self.game.openedNumber = 0;
+        [self.segmentControl setEnabled:true];
+        [self updateUI];
+    }
 }
 
 - (IBAction)changeGameMode:(UISegmentedControl *)sender {
@@ -127,6 +109,8 @@
         default:
             break;
     }
+    UIAlertView *feedback = [[UIAlertView alloc] initWithTitle:@"Game Mode Changed!" message:[[NSString alloc] initWithFormat:@"You now have to match %lu cards", self.game.mode] delegate:nil cancelButtonTitle:@"OK, I know it~" otherButtonTitles:nil];
+    [feedback show];
 }
 
 @end
