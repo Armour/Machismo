@@ -61,7 +61,7 @@ static const int FLIP_COST = 1;
                     [self.choosedCard removeObjectAtIndex:[self.choosedCard indexOfObject:othercard]];
                 }
             }
-            self.information = [[NSString alloc] initWithFormat:@"flip back~"];
+            self.information = [[NSString alloc] initWithFormat:@"Unpicked %@", card.contents];
         } else {
             switch ([self.choosedCard count]) {
                 case 0:
@@ -69,7 +69,7 @@ static const int FLIP_COST = 1;
                     self.openedNumber++;
                     [self.choosedCard addObject:card];
                     card.chosen = YES;
-                    self.information = [[NSString alloc] initWithFormat:@""];
+                    self.information = [[NSString alloc] initWithFormat:@"Picked %@", card.contents];
                     break;
                 case 1:
                     if (self.mode == 2) {
@@ -98,7 +98,7 @@ static const int FLIP_COST = 1;
                         self.openedNumber++;
                         [self.choosedCard addObject:card];
                         card.chosen = YES;
-                        self.information = [[NSString alloc] initWithFormat:@""];
+                        self.information = [[NSString alloc] initWithFormat:@"Picked %@", card.contents];
                     }
                     break;
                 case 2:
