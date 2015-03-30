@@ -92,11 +92,13 @@ static const int FLIP_COST = 1;
                             [self.choosedCard addObject:card];
                             card.chosen = YES;
                         }
+                        self.information = [[NSString alloc] initWithString:[card.history lastObject]];
                     } else {
                         self.score -= FLIP_COST;
                         self.openedNumber++;
                         [self.choosedCard addObject:card];
                         card.chosen = YES;
+                        self.information = [[NSString alloc] initWithFormat:@""];
                     }
                     break;
                 case 2:
@@ -119,6 +121,7 @@ static const int FLIP_COST = 1;
                         [self.choosedCard addObject:card];
                         card.chosen = YES;
                     }
+                    self.information = [[NSString alloc] initWithString:[card.history lastObject]];
                     break;
                 default:
                     break;

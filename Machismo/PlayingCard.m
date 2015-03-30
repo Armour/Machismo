@@ -29,26 +29,38 @@
 
 - (int)match:(NSArray *)otherCards {
     int score = 0;
+    NSMutableArray *history = [[NSMutableArray alloc] init];
 
     if ([otherCards count] == 1) {
         PlayingCard *otherCard = [otherCards firstObject];
-        if ([self.suit isEqualToString:otherCard.suit])
+        if ([self.suit isEqualToString:otherCard.suit]) {
             score = 1;
-        else if (self.rank == otherCard.rank)
+            [history addObject:[[NSString alloc] initWithFormat:@"%@ and %@ have the same color, add 1 point~", self.contents, otherCard.contents]];
+        } else if (self.rank == otherCard.rank) {
             score = 4;
+            [history addObject:[[NSString alloc] initWithFormat:@"%@ and %@ have the same rank, add 4 point~", self.contents, otherCard.contents]];
+        }
     } else {
         PlayingCard *otherCard1 = [otherCards firstObject];
         PlayingCard *otherCard2 = [otherCards lastObject];
-        if ([self.suit isEqualToString:otherCard1.suit] && [self.suit isEqualToString:otherCard2.suit])
+        if ([self.suit isEqualToString:otherCard1.suit] && [self.suit isEqualToString:otherCard2.suit]) {
             score = 3;
-        else if (self.rank == otherCard1.rank && self.rank == otherCard2.rank)
+            [history addObject:[[NSString alloc] initWithFormat:@"%@, %@ and %@ have the same color, add 3 point~", self.contents, otherCard1.contents, otherCard2.contents]];
+        } else if (self.rank == otherCard1.rank && self.rank == otherCard2.rank) {
             score = 12;
-        else if ([self togetherA:self.rank withB:otherCard1.rank andC:otherCard2.rank])
+            [history addObject:[[NSString alloc] initWithFormat:@"%@, %@ and %@ have the same rank, add 12 point~", self.contents, otherCard1.contents, otherCard2.contents]];
+        } else if ([self togetherA:self.rank withB:otherCard1.rank andC:otherCard2.rank]) {
             score = 8;
-        else if (self.rank == otherCard1.rank || self.rank == otherCard2.rank || otherCard1.rank == otherCard2.rank)
+            [history addObject:[[NSString alloc] initWithFormat:@"%@, %@ and %@ have the straight flush, add 8 point~", self.contents, otherCard1.contents, otherCard2.contents]];
+        } else if (self.rank == otherCard1.rank || self.rank == otherCard2.rank || otherCard1.rank == otherCard2.rank) {
             score = 4;
+            [history addObject:[[NSString alloc] initWithFormat:@"%@, %@ and %@ have one pair, add 4 point~", self.contents, otherCard1.contents, otherCard2.contents]];
+        }
     }
 
+    if (score == 0)
+        [history addObject:[[NSString alloc] initWithFormat:@""]];
+    self.history = history;
     return score;
 }
 
