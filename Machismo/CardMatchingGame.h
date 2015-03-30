@@ -23,9 +23,6 @@
                         usingDeck: (Deck *)deck;
 - (void)chooseCardAtIndex:(NSUInteger) index;
 - (Card *)cardAtIndex:(NSUInteger) index;
-- (void)letMeSee:(NSUInteger) index ;
-- (void)afterSeeIt:(NSUInteger) index ;
-- (BOOL)alreadyChosen:(NSUInteger) index ;
 
 @end
 
